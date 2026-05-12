@@ -7,6 +7,7 @@
 <title>emotional housekeeping</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3C/svg%3E">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root {
@@ -115,6 +116,7 @@
   }
 
   /* ——— playlist ——— */
+  .playlist { margin-top: -1.5rem; }
   .playlist iframe {
     border: none;
     border-radius: 12px;
@@ -540,6 +542,14 @@
   colorize(document.getElementById('title'), 'emotional housekeeping');
   // Color the playlist label
   colorize(document.getElementById('playlistLabel'), "this week's playlist");
+
+  // ——— Favicon: lowercase 'e' in a random palette color ———
+  (function setFavicon() {
+    const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="78" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif" font-size="92" font-weight="800" text-anchor="middle" fill="${color}">e</text></svg>`;
+    const encoded = 'data:image/svg+xml,' + encodeURIComponent(svg);
+    document.getElementById('favicon').href = encoded;
+  })();
 
   // ——— Live timestamp (Apple Notes format) ———
   function updateTimestamp() {
