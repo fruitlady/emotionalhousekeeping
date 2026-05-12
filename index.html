@@ -104,13 +104,22 @@
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
   }
+  .section-label.playlist-label {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+  .section-label .ltr {
+    display: inline-block;
+    font-weight: 700;
+    transition: color 0.4s ease;
+  }
 
   /* ——— playlist ——— */
   .playlist iframe {
     border: none;
     border-radius: 12px;
     width: 100%;
-    height: 80px;
+    height: 152px;
     display: block;
   }
   .playlist-note {
@@ -139,7 +148,8 @@
   .lock .warn {
     font-size: 0.9rem;
     color: var(--muted);
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
     line-height: 1.5;
     padding: 0.75rem 1rem;
     background: var(--faint);
@@ -262,6 +272,120 @@
 
   ::selection { background: var(--ink); color: var(--paper); }
 
+  /* ——— inline link ——— */
+  .inline-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--soft);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    transition: text-decoration-color 0.2s;
+  }
+  .inline-link:hover { text-decoration-color: var(--ink); }
+
+  /* ——— modal ——— */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.35);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4rem 1.5rem 2rem;
+    z-index: 100;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: fadeIn 0.25s ease-out;
+  }
+  .overlay.open { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: var(--paper);
+    border-radius: 14px;
+    max-width: 560px;
+    width: 100%;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: rise 0.3s ease-out;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    background: transparent;
+    color: var(--muted);
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .modal-close:hover { color: var(--ink); background: var(--faint); }
+
+  .modal h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .modal-lede {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .modal-lede:last-of-type { margin-bottom: 1.75rem; }
+
+  .modal-section {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-tech {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+  .modal-tech a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--soft);
+    text-underline-offset: 2px;
+  }
+  .modal-tech a:hover { text-decoration-color: var(--ink); }
+
+  @media (max-width: 500px) {
+    .overlay { padding: 2rem 1rem; }
+    .modal { padding: 2rem 1.25rem 1.5rem; }
+    .modal h2 { font-size: 1.25rem; }
+    .modal-lede { font-size: 0.95rem; }
+  }
+
   /* ——— mobile refinements ——— */
   @media (max-width: 500px) {
     body { padding-left: 1.25rem; padding-right: 1.25rem; }
@@ -298,17 +422,17 @@
     <section class="journal">
       <div class="section-label">a place to put it down</div>
       <p class="journal-intro">
-        Anything you write here is encrypted in your browser with a passphrase only you know. <span class="quiet">It never leaves your device. I can't read it. No one can.</span>
+        Anything you write here is encrypted in your browser with a passphrase only you know. <span class="quiet">It never leaves your device. I can't read it. <a href="#" id="howItWorksLink" class="inline-link">No one can.</a></span>
       </p>
 
       <!-- lock screen -->
       <div id="lock" class="lock">
-        <div class="warn" id="warnBox">
-          Write your passphrase down somewhere safe. If you lose it, your writing is gone. No recovery, no reset. That's the whole point.
-        </div>
         <div class="input-row">
           <input type="password" id="passphrase" placeholder="passphrase" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
           <button id="unlockBtn" aria-label="Open"></button>
+        </div>
+        <div class="warn" id="warnBox">
+          Write your passphrase down somewhere safe. If you lose it, your writing is gone. No recovery, no reset. That's the whole point.
         </div>
         <div class="error" id="errorMsg"></div>
       </div>
@@ -328,7 +452,7 @@
 
     <!-- ——— playlist ——— -->
     <section class="playlist">
-      <div class="section-label">this week's playlist</div>
+      <div class="section-label playlist-label" id="playlistLabel" aria-label="this week's playlist"></div>
       <iframe
         id="playlist-frame"
         src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZqd5JICZI0u?utm_source=generator&theme=0"
@@ -342,6 +466,31 @@
       emotionalhousekeeping.com
     </footer>
   </main>
+
+  <!-- ——— how it works modal ——— -->
+  <div id="howItWorksOverlay" class="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close">×</button>
+      <h2 id="modalTitle">how this works</h2>
+
+      <p class="modal-lede">
+        When you write here, your words are scrambled by your browser before they're stored. The key to unscramble them is your passphrase, which never leaves your device. The site doesn't have a server that holds your writing. I don't have a database. There's no copy of your words anywhere except on the computer you're sitting at.
+      </p>
+
+      <p class="modal-lede">
+        If you lose your passphrase, your writing is gone for good. Not "gone" in the sense that someone could recover it for you. Gone in the sense that the math itself prevents recovery. This is intentional. The trade-off for real privacy is real responsibility.
+      </p>
+
+      <p class="modal-lede">
+        I made this because I wanted a room on the internet that didn't ask anything of you. Not your email, not your name, not your data. Just a place to put things down.
+      </p>
+
+      <h3 class="modal-section">for the curious</h3>
+      <p class="modal-tech">
+        Encryption uses AES-GCM with a 256-bit key. The key is derived from your passphrase via PBKDF2 with 250,000 iterations of SHA-256, plus a random salt generated fresh on first use. Every save uses a new initialization vector. All of this happens through the browser's built-in Web Crypto API. The encrypted blob is stored in your browser's localStorage. The source code is on <a href="https://github.com/fruitlady/emotionalhousekeeping" target="_blank" rel="noopener">GitHub</a> if you want to read it.
+      </p>
+    </div>
+  </div>
 
 <script>
   // ——— Color palette (used by title and button) ———
@@ -389,6 +538,8 @@
 
   // Color the title once on load
   colorize(document.getElementById('title'), 'emotional housekeeping');
+  // Color the playlist label
+  colorize(document.getElementById('playlistLabel'), "this week's playlist");
 
   // ——— Live timestamp (Apple Notes format) ———
   function updateTimestamp() {
@@ -687,6 +838,34 @@
   });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden' && currentPassphrase) saveNow();
+  });
+
+  // ——— How it works modal ———
+  const howItWorksLink = document.getElementById('howItWorksLink');
+  const overlay = document.getElementById('howItWorksOverlay');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+  function openModal() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  howItWorksLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+  });
+  modalCloseBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
   });
 </script>
 </body>
