@@ -36,7 +36,7 @@
   body {
     min-height: 100vh;
     min-height: 100dvh;
-    padding: max(env(safe-area-inset-top), 2rem) 1.5rem max(env(safe-area-inset-bottom), 3rem);
+    padding: max(env(safe-area-inset-top), 1.5rem) 1.5rem max(env(safe-area-inset-bottom), 2rem);
   }
 
   main {
@@ -49,7 +49,7 @@
     text-align: center;
     font-size: 0.78rem;
     color: var(--muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     letter-spacing: -0.01em;
   }
 
@@ -59,7 +59,7 @@
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.025em;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1rem;
     word-spacing: 0.1em;
   }
   h1 .ltr {
@@ -71,14 +71,14 @@
   .pron {
     font-size: 0.95rem;
     color: var(--muted);
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.85rem;
     letter-spacing: -0.01em;
   }
 
   .definition {
     font-size: 1.05rem;
-    line-height: 1.55;
-    margin-bottom: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
     color: var(--ink);
   }
   .definition .num {
@@ -91,17 +91,17 @@
     font-style: italic;
     color: var(--muted);
     font-size: 0.98rem;
-    line-height: 1.55;
-    margin-bottom: 3rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
   }
 
   /* ——— section spacing ——— */
-  section { margin-bottom: 2rem; }
+  section { margin-bottom: 1.5rem; }
 
   .section-label {
     font-size: 0.85rem;
     color: var(--muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
   }
 
@@ -110,22 +110,22 @@
     border: none;
     border-radius: 12px;
     width: 100%;
-    height: 152px;
+    height: 80px;
     display: block;
   }
   .playlist-note {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--muted);
-    margin-top: 0.85rem;
+    margin-top: 0.6rem;
     font-style: italic;
   }
 
   /* ——— journal ——— */
   .journal-intro {
-    font-size: 1rem;
+    font-size: 0.98rem;
     color: var(--ink);
-    margin-bottom: 1.5rem;
-    line-height: 1.55;
+    margin-bottom: 1rem;
+    line-height: 1.5;
   }
   .journal-intro .quiet {
     color: var(--muted);
@@ -137,11 +137,11 @@
   }
 
   .lock .warn {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     color: var(--muted);
-    margin-bottom: 1.25rem;
-    line-height: 1.55;
-    padding: 0.9rem 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
     background: var(--faint);
     border-radius: 10px;
   }
@@ -233,11 +233,11 @@
 
   textarea {
     width: 100%;
-    min-height: 55vh;
-    padding: 1.25rem;
+    min-height: 12rem;
+    padding: 1rem 1.25rem;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
     font-size: 1.05rem;
-    line-height: 1.65;
+    line-height: 1.6;
     color: var(--ink);
     background: var(--paper);
     border: 1px solid var(--rule);
@@ -252,8 +252,8 @@
 
   /* ——— footer ——— */
   footer {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
     font-size: 0.78rem;
     color: var(--muted);
     text-align: center;
@@ -272,10 +272,10 @@
 
   /* ——— desktop refinements ——— */
   @media (min-width: 768px) {
-    body { padding-top: 4rem; padding-bottom: 5rem; }
+    body { padding-top: 2.5rem; padding-bottom: 3rem; }
     h1 { font-size: 2.4rem; }
-    .timestamp { font-size: 0.82rem; margin-bottom: 3rem; }
-    section { margin-bottom: 2.5rem; }
+    .timestamp { font-size: 0.82rem; margin-bottom: 2rem; }
+    section { margin-bottom: 1.75rem; }
   }
 </style>
 </head>
